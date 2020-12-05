@@ -49,3 +49,11 @@ model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=10, batch_s
 # Final evaluacion del modelo
 scores = model.evaluate(X_test, y_test, verbose=0)
 print("CNN Error: %.2f%%" % (100-scores[1]*100))
+
+class ImageSettings: 
+    def __init__ (self, img_dim, classes): 
+      self.img_zise = img_dim
+      self.img_size_flat = self.img_zise * self.img_zise
+      self.img_shape = (self.img_size, self.img_zise)
+      self.img_shape_full = (self.img_zise, self.img_zise)
+      self.num_classes = classes
