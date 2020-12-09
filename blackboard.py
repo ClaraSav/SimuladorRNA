@@ -1,14 +1,8 @@
 import pygame as pg
 
-# pip install pygame==2.0.0.dev10
- 
-"""
-With this program you can draw on the 
-screen with pygame
- 
- 
-pythonprogramming.altervista.org
-"""
+# class blackboard:
+
+
  
 def init():
     global screen
@@ -59,4 +53,4 @@ def mainloop():
     pg.quit()
  
  
-init()
+# init()

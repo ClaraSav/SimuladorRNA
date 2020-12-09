@@ -12,7 +12,8 @@ from tensorflow.examples.tutorials.mnist import input_data
 
 
 # Import other classes
-import images_settings
+from images_settings import ImageSettings
+import blackboard
 
 data = input_data.read_data_sets('data/MNIST/', one_hot=True)
 data.test.cls = np.argmax(data.test.labels, axis=1)
@@ -26,15 +27,12 @@ class ModelSequential(Sequential):
         Sequential.__init__(self)
 
         # New attributes
-        self.img_size = 28
-        self.img_size_flat = self.img_size * self.img_size
-        self.img_shape_full = (self.img_size, self.img_size, 1)
-        self.num_classes = 10
+        self.image_setting = ImageSettings(28, 10)
 
     def start_model(self):
         """Define the necessary structure"""
-        self.add(InputLayer(input_shape=(self.img_size_flat,)))  # Add an input layer
-        self.add(Reshape(self.img_shape_full))  # convolutional layers expect images with shape (28, 28, 1), so we reshape
+        self.add(InputLayer(input_shape=(self.image_setting.img_size_flat,)))  # Add an input layer
+        self.add(Reshape(self.image_setting.img_shape_full))  # convolutional layers expect images with shape (28, 28, 1), so we reshape
         self.add(Conv2D(kernel_size=5, strides=1, filters=16, padding='same', activation='relu',
                         name='layer_conv1'))  # First convolutional layer
         self.add(MaxPooling2D(pool_size=2, strides=2))
@@ -44,7 +42,7 @@ class ModelSequential(Sequential):
         self.add(
             Flatten())  # Flatten the 4-level output of convolutional layers to 2-rank that can be entered into a fully connected layer
         self.add(Dense(128, activation='relu'))  # Fully connected first layer
-        self.add(Dense(self.num_classes,
+        self.add(Dense(self.image_setting.num_classes,
                        activation='softmax'))  # last fully connected layer from which the classification is derived
 
         # compile the model
