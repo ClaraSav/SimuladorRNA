@@ -12,7 +12,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 
 
 # Import other classes
-from . import images_settings
+import images_settings
 
 data = input_data.read_data_sets('data/MNIST/', one_hot=True)
 data.test.cls = np.argmax(data.test.labels, axis=1)
@@ -34,13 +34,12 @@ class ModelSequential(Sequential):
     def start_model(self):
         """Define the necessary structure"""
         self.add(InputLayer(input_shape=(self.img_size_flat,)))  # Add an input layer
-        self.add(
-            Reshape(self.img_shape_full))  # convolutional layers expect images with shape (28, 28, 1), so we reshape
+        self.add(Reshape(self.img_shape_full))  # convolutional layers expect images with shape (28, 28, 1), so we reshape
         self.add(Conv2D(kernel_size=5, strides=1, filters=16, padding='same', activation='relu',
                         name='layer_conv1'))  # First convolutional layer
         self.add(MaxPooling2D(pool_size=2, strides=2))
         self.add(Conv2D(kernel_size=5, strides=1, filters=36, padding='same', activation='relu',
-                        name='layer_conv2'))  # Segunda capa convolucional
+                        name='layer_conv2'))  # Second convolutional layer
         self.add(MaxPooling2D(pool_size=2, strides=2))
         self.add(
             Flatten())  # Flatten the 4-level output of convolutional layers to 2-rank that can be entered into a fully connected layer
@@ -58,6 +57,9 @@ class ModelSequential(Sequential):
 
 if __name__ == '__main__':
     print('jajaja')
+    print('jajaja')
+    print('jajaja')
+    print(data.train.images)
     model = ModelSequential()
     model.start_model()
     model.train_the_model()

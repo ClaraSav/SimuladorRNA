@@ -15,13 +15,14 @@ def init():
  
     pg.init()
     screen = pg.display.set_mode((400, 400))
+    screen.fill((255, 255, 255))
     mainloop()
  
  
 drawing = False
 last_pos = None
-w = 1
-color = (255, 0, 255)
+w = 20
+color = (0, 0, 0)
  
  
 def draw(event):
