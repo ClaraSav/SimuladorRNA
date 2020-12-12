@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import easygui as eg
 import math
 
 # Import keras
@@ -51,16 +52,25 @@ class ModelSequential(Sequential):
 
     def train_the_model(self):
         self.fit(x=data.train.images, y=data.train.labels, epochs=10, batch_size=128)
+#
+#
+# class Interface:
+#
+#     def __init__(self):
+#         self.blackboard = blackboard.blackboard()
+#         eg.msgbox(msg='Caja de mensaje simple',  title='Control: msgbox', ok_button='Continuar')
 
 
 if __name__ == '__main__':
     print('jajaja')
     print('jajaja')
     print('jajaja')
-    print(data.train.images)
-    model = ModelSequential()
-    model.start_model()
-    model.train_the_model()
-    result = model.evaluate(x=data.test.images, y=data.test.labels)
-    print("{0}: {1:.2%}".format(model.metrics_names[1], result[1]))
+    pizarra = blackboard.Blackboard()
+    pizarra.show_blackboard()
+    # print(data.train.images)
+    # model = ModelSequential()
+    # model.start_model()
+    # model.train_the_model()
+    # result = model.evaluate(x=data.test.images, y=data.test.labels)
+    # print("{0}: {1:.2%}".format(model.metrics_names[1], result[1]))
 
