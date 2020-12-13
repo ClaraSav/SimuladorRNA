@@ -45,8 +45,14 @@ class Blackboard:
         self.bt_reset2 = pg.image.load("reset2.png")
         self.bt_reset2 = pg.transform.scale(self.bt_reset2, [100, 30])
 
+        self.bt_prueba1 = pg.image.load("prueba1.png")
+        self.bt_prueba1 = pg.transform.scale(self.bt_prueba1, [100, 30])
+        self.bt_prueba2 = pg.image.load("prueba2.png")
+        self.bt_prueba2 = pg.transform.scale(self.bt_prueba2, [100, 30])
+
         self.boton1 = Button(self.bt_procces1, self.bt_procces2, 680, 50)
         self.boton2 = Button(self.bt_reset1, self.bt_reset2, 680, 100)
+        self.boton3 = Button(self.bt_prueba1, self.bt_prueba2, 680, 150)
 
         self.result = pg.sprite.Sprite()
         self.cursor1 = Cursor()
@@ -120,6 +126,7 @@ class Blackboard:
                 self.cursor1.update()
                 self.boton1.update(self.screen, self.cursor1)
                 self.boton2.update(self.screen, self.cursor1)
+                self.boton3.update(self.screen, self.cursor1)
             pg.display.flip()
         pg.quit()
 

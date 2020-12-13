@@ -96,37 +96,37 @@ class Main(blackboard.Blackboard):
         if event.type == pg.MOUSEBUTTONDOWN:
             if cursor.colliderect(self.boton1.rect):
                 self.name = "image%s.png" % time.strftime("%Y-%m-%d %H:%M:%S")
-                self.capture(self.screen, self.name, (50, 50), (500, 500))
+                # self.capture(self.screen, self.name, (50, 50), (500, 500))
+
+
 
                 # Intento 1
                 # image = ImageSettings()
                 # img_array = image.image_to_matrix(self.name)
                 # img_array.flatten()
+                # img_array.Rescaling(1./255)
                 # print('imagen')
                 # print('imagen')
                 # print('imagen')
                 # print(img_array)
+                # print(img_array.shape)
                 #
                 # predictions = self.model.predict(x=[img_array])
                 # print('predicciones: ')
                 # print(np.argmax(predictions[0]))
                 # print(predictions[0])
 
-                img = tf.keras.preprocessing.image.load_img(
-                    self.name, target_size=(28, 28)
-                )
-                img_array = tf.keras.preprocessing.image.img_to_array(img)
-                # img_array = tf.expand_dims(img_array, 0)  # Create a batch
-                img_array.flatten()
 
-                predictions = self.model.predict(x=[img_array])
-                score = tf.nn.softmax(predictions[0])
-
-
-
-            if cursor.colliderect(self.boton2.rect):
+            elif cursor.colliderect(self.boton2.rect):
                 self.screen.fill((119, 119, 119))
                 self.screen.blit(self.blackboard_draw, (50, 50))
+            elif cursor.colliderect(self.boton3.rect):
+                images = data.test.images[15:24]
+                cls_true = data.test.cls[15:24]
+                y_pred = self.model.predict(x=images)
+                cls_pred = np.argmax(y_pred, axis=1)
+
+                self.plot_images(images=images, cls_true=cls_true, cls_pred=cls_pred)
 
 
 if __name__ == '__main__':
