@@ -47,7 +47,10 @@ class Blackboard:
 
         self.boton1 = Button(self.bt_procces1, self.bt_procces2, 680, 50)
         self.boton2 = Button(self.bt_reset1, self.bt_reset2, 680, 100)
+
+        self.result = pg.sprite.Sprite()
         self.cursor1 = Cursor()
+        self.name = "image.png"
 
     def show_blackboard(self):
         pg.init()
@@ -85,6 +88,19 @@ class Blackboard:
         image.blit(display, (0, 0), (pos, size))  # Blit portion of the display to the image
         pg.image.save(image, name)  # Save the image to the disk
 
+    def others_events(self, event, cursor):
+        """for add events of others class"""
+        pass
+
+    def draw_text(self, string, container, font_render, color=(0, 0, 0)):
+        text = font_render.render(string, 1, color)
+        rect_text = text.get_rect()
+        centroX = container.width / 2
+        centroY = container.height / 2
+        diferencia_x = centroX - rect_text.center[0]
+        diferencia_y = centroY - rect_text.center[1]
+        self.screen.blit(text, [container.left + diferencia_x, container.top + diferencia_y])
+
     def mainloop(self):
         loop = 1
         while loop:
@@ -94,12 +110,13 @@ class Blackboard:
                     loop = 0
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_s:
-                        name = "image%s.png" % time.strftime("%Y-%m-%d %H:%M:%S")
-                        self.capture(self.screen, name, (50,50), (500,500))
+                        self.name = "image%s.png" % time.strftime("%Y-%m-%d %H:%M:%S")
+                        self.capture(self.screen, self.name, (50,50), (500,500))
                     if event.key == pg.K_r:
                         self.screen.fill((119, 119, 119))
                         self.screen.blit(self.blackboard_draw, (50, 50))
                 self.draw(event)
+                self.others_events(event, self.cursor1)
                 self.cursor1.update()
                 self.boton1.update(self.screen, self.cursor1)
                 self.boton2.update(self.screen, self.cursor1)

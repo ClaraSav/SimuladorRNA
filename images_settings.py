@@ -5,7 +5,7 @@ import cv2
 
 class ImageSettings:
 
-    def __init__(self, img_dim, classes):
+    def __init__(self, img_dim=28, classes=1):
         self.img_size = img_dim
         self.img_size_flat = self.img_size * self.img_size
         self.img_shape = (self.img_size, self.img_size)
